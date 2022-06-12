@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="MysqlTables" targetRuntime="MyBatis3"  defaultModelType="flat">
+<!--        数据库连接配置 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/seckill?useUnicode=true&amp;characterEncoding=UTF-8"
+                        userId="root"
+                        password="zwt123">
+        </jdbcConnection>
+<!--        生成实体类DataObject存放位置-->
+        <javaModelGenerator targetPackage="com.zwt.dataobject" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+<!--        生成映射文件存放的位置-->
+        <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+<!--        生成DAO类的存放位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.zwt.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+<!--        数据库表映射到实体类-->
+        <table tableName="user_info" domainObjectName="UserDO"
+                enableCountByExample="false"
+                enableUpdateByExample="false"
+                enableDeleteByExample="false"
+                enableSelectByExample="false"
+                selectByExampleQueryId="false"/>
+        <table tableName="user_password" domainObjectName="UserPasswordDO"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+    </context>
+</generatorConfiguration>
