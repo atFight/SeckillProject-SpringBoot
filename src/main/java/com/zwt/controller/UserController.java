@@ -11,12 +11,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Random;
+
 @Controller
 @RequestMapping("/user")
 public class UserController extends  BaseController{
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private HttpServletRequest httpServletRequest;
+
+    @RequestMapping("/getotp")
+    @ResponseBody
+    public CommonReturnType getOtp(@RequestParam(name = "telphone")String telPhone) {
+        //生成6位随机OTP验证码
+        Random random = new Random();
+        int randomCode = random.nextInt(999999) + 1000000;
+        String otpCode = String.valueOf(randomCode).substring(1);
+
+        //绑定手机号与验证码
+        httpServletRequest.getSession().setAttribute(telPhone, otpCode);
+
+        //模拟发送短信给客户进行验证
+        System.out.println("telephone = " + telPhone + ", bind otp code = " + otpCode);
+        return CommonReturnType.create(otpCode);
+    }
+
+
 
     @RequestMapping("/get")
     @ResponseBody
