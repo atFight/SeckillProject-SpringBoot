@@ -1,6 +1,8 @@
 package com.zwt.controller;
 
 import com.zwt.controller.viewobject.UserVO;
+import com.zwt.error.BusinessException;
+import com.zwt.error.EmBusinessError;
 import com.zwt.response.CommonReturnType;
 import com.zwt.service.UserService;
 import com.zwt.service.model.UserModel;
@@ -20,8 +22,13 @@ public class UserController {
 
     @RequestMapping("/get")
     @ResponseBody
-    public CommonReturnType getUser(@RequestParam(name="id")Integer id) {
+    public CommonReturnType getUser(@RequestParam(name="id")Integer id) throws BusinessException {
         UserModel userModel = userService.getUserById(id);
+
+        if (userModel == null) {
+            throw new BusinessException(EmBusinessError.USER_NOT_EXIST);
+        }
+
         UserVO userVO = convertFromModel(userModel);
         return CommonReturnType.create(userVO);
     }
