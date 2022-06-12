@@ -1,15 +1,13 @@
-package com.zwt.service.model;
+package com.zwt.controller.viewobject;
 
 import lombok.Data;
 
 @Data
-public class UserModel {
+public class UserVO {
     private Integer id;
     private String name;
     private Integer sex;
     private Integer age;
     private String telphone;
-    private String registerMode;
-    private String thirdPartyId;
-    private String encrptPassword;
+
 }
