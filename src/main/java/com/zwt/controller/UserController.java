@@ -16,6 +16,7 @@ import java.util.Random;
 
 @Controller
 @RequestMapping("/user")
+@CrossOrigin
 public class UserController extends  BaseController{
 
     @Autowired
@@ -23,7 +24,7 @@ public class UserController extends  BaseController{
     @Autowired
     private HttpServletRequest httpServletRequest;
 
-    @RequestMapping("/getotp")
+    @RequestMapping(value = "/getotp", method = {RequestMethod.POST, RequestMethod.GET}, consumes = {CONTENT_TYPE_FORMED})
     @ResponseBody
     public CommonReturnType getOtp(@RequestParam(name = "telphone")String telPhone) {
         //生成6位随机OTP验证码

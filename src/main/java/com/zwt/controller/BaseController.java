@@ -14,6 +14,8 @@ import java.util.Map;
 
 public class BaseController {
 
+    public static final String CONTENT_TYPE_FORMED = "application/x-www-form-urlencoded";
+
     //拦截抛出的异常并且处理
     @ExceptionHandler(BusinessException.class)
     @ResponseStatus(HttpStatus.OK)
