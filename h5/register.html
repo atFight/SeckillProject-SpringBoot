@@ -111,11 +111,11 @@
                     if (data.status=="success") {
                         alert("注册成功");
                     }else {
-                        alert("注册失败，原因为" + data.data.errMsg);
+                        alert("注册失败," + data.data.errMsg);
                     }
                 },
                 error:function (data) {
-                    alert("注册失败，原因为"+data.responseText);
+                    alert("注册失败，"+data.responseText);
                 }
             });
             return false;
