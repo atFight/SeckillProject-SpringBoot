@@ -29,7 +29,20 @@ public class UserController extends  BaseController{
     @Autowired
     private HttpServletRequest httpServletRequest;
 
-    private static String tmpCode;
+    @RequestMapping(value = "/login", method = {RequestMethod.POST, RequestMethod.GET}, consumes = {CONTENT_TYPE_FORMED})
+    @ResponseBody
+    public CommonReturnType login(@RequestParam("telphone")String telPhone,
+                                  @RequestParam("password")String password) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
+        if (StringUtils.isEmpty(telPhone) || StringUtils.isEmpty(password)) {
+            throw new BusinessException(EmBusinessError.USER_LOGIN_FAIL);
+        }
+
+        UserModel userModel = userService.validateLogin(telPhone, this.EncodeByMd5(password));
+        this.httpServletRequest.getSession().setAttribute("IS_LOGIN", true);
+        this.httpServletRequest.getSession().setAttribute("LOGIN_USER", userModel);
+
+        return CommonReturnType.create(null);
+    }
 
     @RequestMapping(value = "/getotp", method = {RequestMethod.POST, RequestMethod.GET}, consumes = {CONTENT_TYPE_FORMED})
     @ResponseBody
@@ -41,7 +54,6 @@ public class UserController extends  BaseController{
 
         //绑定手机号与验证码
         httpServletRequest.getSession().setAttribute(telPhone, otpCode);
-        tmpCode = otpCode;
 
         //模拟发送短信给客户进行验证
         System.out.println("telephone = " + telPhone + ", bind otp code = " + otpCode);
@@ -58,10 +70,6 @@ public class UserController extends  BaseController{
                                      @RequestParam("password")String password) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
 
         String onSessionOtpCode = (String) httpServletRequest.getSession().getAttribute(telPhone);
-        if (onSessionOtpCode == null) {
-            onSessionOtpCode = tmpCode;
-        }
-
         if (!StringUtils.equals(otpCode, onSessionOtpCode)) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "短信验证码错误");
         }
