@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +27,10 @@ public class BaseController {
             BusinessException exception = (BusinessException) ex;
             responseData.put("errCode", exception.getErrCode());
             responseData.put("errMsg", exception.getErrMsg());
-        } else {
+        } else if (ex instanceof SQLException) {
+            responseData.put("errCode", EmBusinessError.SQL_ERROR.getErrCode());
+            responseData.put("errMsg", EmBusinessError.SQL_ERROR.getErrMsg());
+        }else {
             responseData.put("errCode", EmBusinessError.UNKNOWN_ERROR.getErrCode());
             responseData.put("errMsg", EmBusinessError.UNKNOWN_ERROR.getErrMsg());
         }
