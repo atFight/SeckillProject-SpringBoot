@@ -7,9 +7,6 @@ import com.zwt.error.EmBusinessError;
 import com.zwt.response.CommonReturnType;
 import com.zwt.service.UserService;
 import com.zwt.service.model.UserModel;
-import com.zwt.validator.ValidationResult;
-import com.zwt.validator.ValidatorImpl;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +21,7 @@ import java.util.Random;
 
 @Controller
 @RequestMapping("/user")
-@CrossOrigin(allowCredentials = "true",allowedHeaders = "*")
+@CrossOrigin(allowCredentials = "true",origins = "*")
 public class UserController extends  BaseController{
 
     @Autowired
