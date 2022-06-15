@@ -1,4 +1,4 @@
-package com.zwt.error;
+package com.zwt.utils.error;
 
 
 //包装器业务异常类实现

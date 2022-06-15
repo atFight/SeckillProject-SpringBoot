@@ -1,4 +1,4 @@
-package com.zwt.response;
+package com.zwt.utils.response;
 
 import lombok.Data;
 

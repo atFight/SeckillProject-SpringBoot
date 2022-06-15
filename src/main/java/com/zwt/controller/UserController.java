@@ -1,10 +1,10 @@
 package com.zwt.controller;
 
 import com.alibaba.druid.util.StringUtils;
-import com.zwt.controller.viewobject.UserVO;
-import com.zwt.error.BusinessException;
-import com.zwt.error.EmBusinessError;
-import com.zwt.response.CommonReturnType;
+import com.zwt.viewobject.UserVO;
+import com.zwt.utils.error.BusinessException;
+import com.zwt.utils.error.EmBusinessError;
+import com.zwt.utils.response.CommonReturnType;
 import com.zwt.service.UserService;
 import com.zwt.service.model.UserModel;
 import org.springframework.beans.BeanUtils;

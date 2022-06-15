@@ -1,6 +1,6 @@
 package com.zwt.service;
 
-import com.zwt.error.BusinessException;
+import com.zwt.utils.error.BusinessException;
 import com.zwt.service.model.ItemModel;
 
 import java.util.List;

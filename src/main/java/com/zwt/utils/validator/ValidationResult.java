@@ -1,4 +1,4 @@
-package com.zwt.validator;
+package com.zwt.utils.validator;
 
 import org.apache.commons.lang3.StringUtils;
 

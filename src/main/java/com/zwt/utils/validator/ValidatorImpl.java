@@ -1,4 +1,4 @@
-package com.zwt.validator;
+package com.zwt.utils.validator;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;

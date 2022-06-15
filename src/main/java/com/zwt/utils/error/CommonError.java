@@ -1,4 +1,4 @@
-package com.zwt.error;
+package com.zwt.utils.error;
 
 public interface CommonError {
     public int getErrCode();

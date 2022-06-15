@@ -1,4 +1,4 @@
-package com.zwt.controller.viewobject;
+package com.zwt.viewobject;
 
 import lombok.Data;
 

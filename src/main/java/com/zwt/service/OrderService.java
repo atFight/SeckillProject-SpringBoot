@@ -1,7 +1,6 @@
 package com.zwt.service;
 
-import com.zwt.dataobject.OrderDO;
-import com.zwt.error.BusinessException;
+import com.zwt.utils.error.BusinessException;
 import com.zwt.service.model.OrderModel;
 
 public interface OrderService {

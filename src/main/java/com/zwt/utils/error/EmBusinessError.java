@@ -1,4 +1,4 @@
-package com.zwt.error;
+package com.zwt.utils.error;
 
 public enum EmBusinessError implements CommonError{
     //通用错误类型

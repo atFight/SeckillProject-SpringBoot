@@ -1,4 +1,4 @@
-package com.zwt.controller.viewobject;
+package com.zwt.viewobject;
 
 import com.zwt.service.model.PromoModel;
 import lombok.Data;
