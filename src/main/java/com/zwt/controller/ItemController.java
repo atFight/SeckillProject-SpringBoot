@@ -6,6 +6,8 @@ import com.zwt.error.BusinessException;
 import com.zwt.response.CommonReturnType;
 import com.zwt.service.ItemService;
 import com.zwt.service.model.ItemModel;
+import com.zwt.service.model.PromoModel;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,6 +71,14 @@ public class ItemController extends BaseController{
         }
         ItemVO itemVO = new ItemVO();
         BeanUtils.copyProperties(itemModel, itemVO);
+        if (itemModel.getPromoModel() == null) {
+            itemVO.setPromoStatus(PromoModel.PromoModelStatus.NONE);
+        }else {
+            itemVO.setPromoStatus(itemModel.getPromoModel().getStatus());
+            itemVO.setPromoId(itemModel.getPromoModel().getId());
+            itemVO.setPromoPrice(itemModel.getPromoModel().getPromoItemPrice());
+            itemVO.setPromoStartTime(itemModel.getPromoModel().getStartTime().toString(DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")));
+        }
         return itemVO;
     }
 }

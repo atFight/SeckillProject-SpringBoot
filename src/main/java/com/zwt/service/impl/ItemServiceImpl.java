@@ -7,7 +7,9 @@ import com.zwt.dataobject.ItemStockDO;
 import com.zwt.error.BusinessException;
 import com.zwt.error.EmBusinessError;
 import com.zwt.service.ItemService;
+import com.zwt.service.PromoService;
 import com.zwt.service.model.ItemModel;
+import com.zwt.service.model.PromoModel;
 import com.zwt.validator.ValidationResult;
 import com.zwt.validator.ValidatorImpl;
 import org.springframework.beans.BeanUtils;
@@ -29,6 +31,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ItemStockDOMapper itemStockDOMapper;
+
+    @Autowired
+    private PromoService promoService;
 
     @Override
     @Transactional
@@ -78,7 +83,13 @@ public class ItemServiceImpl implements ItemService {
             return null;
         }
 
-        return this.convertModelFromDataObject(itemDO, itemStockDO);
+        ItemModel itemModel =this.convertModelFromDataObject(itemDO, itemStockDO);
+
+        PromoModel promoModel = promoService.getPromoByItemId(itemModel.getId());
+        if (promoModel != null && promoModel.getStatus() != PromoModel.PromoModelStatus.ENDED) {
+            itemModel.setPromoModel(promoModel);
+        }
+        return itemModel;
     }
 
     @Override

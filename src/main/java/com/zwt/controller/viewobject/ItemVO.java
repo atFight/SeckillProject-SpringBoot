@@ -1,7 +1,9 @@
 package com.zwt.controller.viewobject;
 
+import com.zwt.service.model.PromoModel;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
+import org.joda.time.DateTime;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -30,4 +32,12 @@ public class ItemVO {
     //商品描述图片
     @NotBlank(message = "商品图片信息不能为空")
     private String imgUrl;
+
+    private PromoModel.PromoModelStatus promoStatus;
+
+    private BigDecimal promoPrice;
+
+    private Integer promoId;
+
+    private String promoStartTime;
 }

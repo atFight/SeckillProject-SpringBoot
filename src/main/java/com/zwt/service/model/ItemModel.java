@@ -31,4 +31,6 @@ public class ItemModel {
     //商品描述图片
     @NotBlank(message = "商品图片信息不能为空")
     private String imgUrl;
+
+    private PromoModel promoModel;
 }

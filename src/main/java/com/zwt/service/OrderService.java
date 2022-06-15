@@ -6,5 +6,5 @@ import com.zwt.service.model.OrderModel;
 
 public interface OrderService {
 
-    public OrderModel createOrder(Integer userId, Integer itemId, Integer amount) throws BusinessException;
+    public OrderModel createOrder(Integer userId, Integer itemId, Integer promoId, Integer amount) throws BusinessException;
 }

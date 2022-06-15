@@ -11,6 +11,7 @@ import com.zwt.service.OrderService;
 import com.zwt.service.UserService;
 import com.zwt.service.model.ItemModel;
 import com.zwt.service.model.OrderModel;
+import com.zwt.service.model.PromoModel;
 import com.zwt.service.model.UserModel;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public OrderModel createOrder(Integer userId, Integer itemId, Integer amount) throws BusinessException {
+    public OrderModel createOrder(Integer userId, Integer itemId, Integer promoId, Integer amount) throws BusinessException {
         UserModel userModel = userService.getUserById(userId);
         if (userModel == null) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "用户信息不存在");
@@ -56,6 +57,15 @@ public class OrderServiceImpl implements OrderService {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR, "请输入正确购买数量");
         }
 
+        //校验活动信息
+        if (promoId != null) {
+            if (promoId.intValue() != itemModel.getPromoModel().getId().intValue()) {
+                throw new BusinessException(EmBusinessError.PROMO_INFO_ERROR);
+            }else if (itemModel.getPromoModel().getStatus() != PromoModel.PromoModelStatus.PROCESSING) {
+                throw new BusinessException(EmBusinessError.PROMO_INFO_ERROR, "活动尚未开始");
+            }
+        }
+
         //落单减库存
         boolean isSuccess = itemService.decreaseStock(itemId, amount);
         if (!isSuccess) {
@@ -66,10 +76,15 @@ public class OrderServiceImpl implements OrderService {
         OrderModel orderModel = new OrderModel();
         orderModel.setUserId(userId);
         orderModel.setItemId(itemId);
-        orderModel.setItemPrice(itemModel.getPrice());
+        if (promoId == null) {
+            orderModel.setItemPrice(itemModel.getPrice());
+        }else {
+            orderModel.setItemPrice(itemModel.getPromoModel().getPromoItemPrice());
+        }
         orderModel.setAmount(amount);
-        orderModel.setOrderPrice(itemModel.getPrice().multiply(BigDecimal.valueOf(amount)));
+        orderModel.setOrderPrice(orderModel.getItemPrice().multiply(BigDecimal.valueOf(amount)));
         orderModel.setId(this.generateOrderNo());
+        orderModel.setPromoId(promoId);
 
         OrderDO orderDO = convertFromOrderModel(orderModel);
         orderDOMapper.insertSelective(orderDO);

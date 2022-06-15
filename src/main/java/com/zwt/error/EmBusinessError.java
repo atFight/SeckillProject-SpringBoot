@@ -13,6 +13,7 @@ public enum EmBusinessError implements CommonError{
 
     //30000开头为交易信息相关错误定义
     STOCK_NOT_ENOUGH(30001, "库存不足"),
+    PROMO_INFO_ERROR(30002, "活动信息不正确"),
     ;
 
     private int errCode;
