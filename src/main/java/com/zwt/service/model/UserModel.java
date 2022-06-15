@@ -30,6 +30,6 @@ public class UserModel {
     private String thirdPartyId;
 
     @NotBlank(message = "请输入密码")
-    @Length(min = 6, max = 20, message = "请输入至少6位密码")
+//    @Length(min = 6, max = 20, message = "请输入至少6位密码")
     private String encrptPassword;
 }

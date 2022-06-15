@@ -1,6 +1,7 @@
 package com.zwt.dao;
 
 import com.zwt.dataobject.ItemDO;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -56,4 +57,6 @@ public interface ItemDOMapper {
      * @mbg.generated Tue Jun 14 15:03:32 CST 2022
      */
     int updateByPrimaryKey(ItemDO row);
+
+    int increaseSales(@Param("itemId") Integer itemId, @Param("amount") Integer amount);
 }
