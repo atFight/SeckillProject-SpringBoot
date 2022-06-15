@@ -8,7 +8,7 @@
 
 项目根据MVC架构分为3层  Controller（控制层）、 Model（模型层）、 View（视图层）  ，View层跟Controller层交互，每个Controller都有一个Model，Model通过与DAO的交互去操作数据库
 
-![](C:\Users\96374\AppData\Roaming\Typora\typora-user-images\1655298891389.png)
+![image](https://user-images.githubusercontent.com/54096810/173846818-074fed1d-d89a-4926-ac14-8927604495c5.png)
 
 在本设计中，所有的业务逻辑都在Model层进行处理，并且将对数据库的操作都将转换成DAO类再进行处理，并且返回一个Model对象给Controller，Controller再把其转换成ViewObject给前端（Controller可以理解为只是连接前端与服务端的桥梁），其中ViewObject是一些对用户开放的数据，或者说对用户有价值的数据。
 
