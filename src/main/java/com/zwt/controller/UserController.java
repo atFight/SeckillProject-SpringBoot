@@ -22,7 +22,8 @@ import java.util.Random;
 @Controller
 @RequestMapping("/user")
 @CrossOrigin(allowCredentials = "true",origins = "*", allowedHeaders = "*")
-public class UserController extends  BaseController{
+public class UserController{
+    public static final String CONTENT_TYPE_FORMED = "application/x-www-form-urlencoded";
 
     @Autowired
     private UserService userService;

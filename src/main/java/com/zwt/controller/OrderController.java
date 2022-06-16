@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/order")
 @CrossOrigin(allowCredentials = "true",origins = "*", allowedHeaders = "*")
-public class OrderController extends BaseController{
+public class OrderController{
+    public static final String CONTENT_TYPE_FORMED = "application/x-www-form-urlencoded";
+
     @Autowired
     private OrderService orderService;
 

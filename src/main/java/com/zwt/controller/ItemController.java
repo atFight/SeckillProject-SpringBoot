@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/item")
 @CrossOrigin(allowCredentials = "true",origins = "*", allowedHeaders = "*")
-public class ItemController extends BaseController{
-
+public class ItemController  {
+    public static final String CONTENT_TYPE_FORMED = "application/x-www-form-urlencoded";
     @Autowired
     private ItemService itemService;
 
